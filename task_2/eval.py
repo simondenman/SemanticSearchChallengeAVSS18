@@ -92,9 +92,9 @@ def MetricsForSequence(sequence, iou_thresh = 0.4):
 	for s in sequence:
 		average_iou += s['IoU']
 		if (s['IoU'] >= iou_thresh):
-			iou_above_thresh += 1
+			iou_above_thresh += 1.0
 
-	return {'average_IoU' : average_iou/len(sequence), 'percentage_above_thresh' : iou_above_thresh / len(sequence), 'observations' : len(sequence)}
+	return {'average_IoU' : average_iou/float(len(sequence)), 'percentage_above_thresh' : iou_above_thresh / float(len(sequence)), 'observations' : len(sequence)}
 
 #
 # Get metrics for the entire dataset, will compute metrics per sequence and overall metrics
