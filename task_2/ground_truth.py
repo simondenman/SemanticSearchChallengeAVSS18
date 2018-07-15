@@ -11,7 +11,7 @@ import os
 #
 # get the bounding box of a detection
 #
-def GetBoundingBox(fhs)
+def GetBoundingBox(fhs):
 	bb = {}
 	bb['left'] = min(fhs['hx'], fhs['rfx'], fhs['lfx'], fhs['rsx'], fhs['lsx'], fhs['rnx'], fhs['lnx'], fhs['rwx'], fhs['lwx'])
 	bb['right'] = max(fhs['hx'], fhs['rfx'], fhs['lfx'], fhs['rsx'], fhs['lsx'], fhs['rnx'], fhs['lnx'], fhs['rwx'], fhs['lwx'])

@@ -5,6 +5,7 @@
 #	SD, 2018/06/18		Initial effort
 #	SD, 2018/06/19		more coding
 #	SD, 2018/06/19		still going, I haven't had much time, added some comments too
+#	2D, 2018/07/15		finally got back to this, added a missing return
 #
 
 import results
@@ -73,6 +74,8 @@ def EvaluateDataset(gt_sequences, results_sequence):
 	results = []
 	for gt, res in zip(gt_sequences, results_sequence):
 		results.append(EvaluateSequence(gt, res))
+
+	return results
 
 #
 # Get some metrics for a sequence, compute somethings like the average IoU, number of frames above
