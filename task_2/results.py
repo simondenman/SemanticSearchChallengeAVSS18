@@ -15,7 +15,7 @@ import os
 def ParseSequence(filename):
 	rows = []
 
-	csv_file = csv.DictReader(open(filename, 'r'), delimiter=',')
+	csv_file = csv.DictReader(open(filename, 'r'), skipinitialspace=True, delimiter=',')
 	for r in csv_file:
 		rows.append(r)
 
@@ -37,8 +37,7 @@ def ParseResults(path, num_subjects):
 
 def GetResultsForFrame(results, frame_id):
 	for i in results:
-		print(i)
-		if (i['frame'] == frame_id):
+		if (int(i['frame']) == int(frame_id)):
 			return i
 
 	return None

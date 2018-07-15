@@ -22,12 +22,12 @@ These files should be in csv format, with one line representing the results for 
 
 A portion of an example file is shown below.
 ```
-frame, left, top, right, bottom
-62, 222, 2, 269, 122
-63, 220, 6, 268, 126
-64, 219, 3, 267, 123
-65, 221, 0, 269, 119
-66, 221, 2, 268, 122
+frame,left,top,right,bottom
+62,222,2,269,122
+63,220,6,268,126
+64,219,3,267,123
+65,221,0,269,119
+66,221,2,268,122
 ...
 
 ```
@@ -36,22 +36,22 @@ Please ensure to include the column headings in the first row of your output.
 For these results files, you may have some frames which are either initialisation frames (i.e. not used for detection) or where your approach does not detect the target. You can handle these frames in one of two ways:
 1. Don't include that frame in your results for. For example, considering the example frame above, if the system failed to detect the target for frame 63 the output file could be:
 ```
-frame, left, top, right, bottom
-62, 222, 2, 269, 122
-64, 219, 3, 267, 123
-65, 221, 0, 269, 119
-66, 221, 2, 268, 122
+frame,left,top,right,bottom
+62,222,2,269,122
+64,219,3,267,123
+65,221,0,269,119
+66,221,2,268,122
 ...
 
 ```
 2. Include the index and give the bounding box as an impossible/invalid location. For example, consider frame 63 as the failure frame again:
 ```
-frame, left, top, right, bottom
-62, 222, 2, 269, 122
-63, -1, -1, -1, -1
-64, 219, 3, 267, 123
-65, 221, 0, 269, 119
-66, 221, 2, 268, 122
+frame,left,top,right,bottom
+62,222,2,269,122
+63,-1,-1,-1,-1
+64,219,3,267,123
+65,221,0,269,119
+66,221,2,268,122
 ...
 
 ```

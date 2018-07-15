@@ -21,10 +21,11 @@ import ground_truth
 #
 def Intersection(box_a, box_b):
 	intersection = {}
-	intersection['left'] = min(box_a['left'], box_b['left'])
-	intersection['top'] = min(box_a['top'], box_b['top'])
-	intersection['bottom'] = max(box_a['bottom'], box_b['bottom'])
-	intersection['right'] = max(box_a['right'], box_b['right'])
+	intersection['left'] = min(int(box_a['left']), int(box_b['left']))
+	intersection['top'] = min(int(box_a['top']), int(box_b['top']))
+	intersection['bottom'] = max(int(box_a['bottom']), int(box_b['bottom']))
+	intersection['right'] = max(int(box_a['right']), int(box_b['right']))
+	return intersection
 
 #
 # get the area of a box
@@ -32,10 +33,10 @@ def Intersection(box_a, box_b):
 #	\return 		area of the box, i.e., width*height
 #
 def Area(box):
-	if((box['left'] > box['right']) | (box['top'] > box['bottom'])):
+	if((int(box['left']) > int(box['right'])) | (int(box['top']) > int(box['bottom']))):
 		return 0
 	else:	
-		return (box['right'] - box['left'] + 1)*(box['bottom'] - box['top'] + 1)
+		return (int(box['right']) - int(box['left']) + 1)*(int(box['bottom']) - int(box['top']) + 1)
 
 #
 # get the intersection over union between the two boxes
@@ -44,8 +45,8 @@ def Area(box):
 #	\return 		the intersection over union of the two boxes
 #
 def IoU(box_a, box_b):
-	intsect = Area(Intersection(box_a, box_b))
-	return (intsect/(Area(box_a) + Area(box_b) - intersect))
+	intersect = Area(Intersection(box_a, box_b))
+	return (intersect/(Area(box_a) + Area(box_b) - intersect))
 
 #
 # evaluate a sequence, i.e compare the ground truth to the results from a single sequence
@@ -105,18 +106,18 @@ def MetricsForSequence(sequence, iou_thresh = 0.4):
 def GenerateMetrics(results, iou_thresh = 0.4):
 	sequence_results = []
 	overall_metrics = {}
-	overall_metrics['average_iou'] = 0
+	overall_metrics['average_IoU'] = 0
 	overall_metrics['percentage_above_thresh'] = 0
-	overall_metrics['observations'] = 0
+	overall_metrics['observations'] = 0	
 
 	for r in results:
 		sr = MetricsForSequence(r, iou_thresh)
-		overall_metrics['average_iou'] += sr['average_iou']*sr['observations']
+		overall_metrics['average_IoU'] += sr['average_IoU']*sr['observations']
 		overall_metrics['percentage_above_thresh'] += sr['percentage_above_thresh']*sr['observations']
 		overall_metrics['observations'] += sr['observations']
 		sequence_results.append(sr)
 
-	overall_metrics['average_iou'] /= overall_metrics['observations']
+	overall_metrics['average_IoU'] /= overall_metrics['observations']
 	overall_metrics['percentage_above_thresh'] /= overall_metrics['observations']
 
 	return sequence_results, overall_metrics
