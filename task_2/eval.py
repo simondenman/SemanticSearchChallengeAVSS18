@@ -21,10 +21,10 @@ import ground_truth
 #
 def Intersection(box_a, box_b):
 	intersection = {}
-	intersection['left'] = min(int(box_a['left']), int(box_b['left']))
-	intersection['top'] = min(int(box_a['top']), int(box_b['top']))
-	intersection['bottom'] = max(int(box_a['bottom']), int(box_b['bottom']))
-	intersection['right'] = max(int(box_a['right']), int(box_b['right']))
+	intersection['left'] = max(float(box_a['left']), float(box_b['left']))
+	intersection['top'] = max(float(box_a['top']), float(box_b['top']))
+	intersection['bottom'] = min(float(box_a['bottom']), float(box_b['bottom']))
+	intersection['right'] = min(float(box_a['right']), float(box_b['right']))
 	return intersection
 
 #
@@ -33,10 +33,10 @@ def Intersection(box_a, box_b):
 #	\return 		area of the box, i.e., width*height
 #
 def Area(box):
-	if((int(box['left']) > int(box['right'])) | (int(box['top']) > int(box['bottom']))):
+	if((float(box['left']) > float(box['right'])) | (float(box['top']) > float(box['bottom']))):
 		return 0
 	else:	
-		return (int(box['right']) - int(box['left']) + 1)*(int(box['bottom']) - int(box['top']) + 1)
+		return (float(box['right']) - float(box['left']) + 1)*(float(box['bottom']) - float(box['top']) + 1)
 
 #
 # get the intersection over union between the two boxes

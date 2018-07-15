@@ -12,11 +12,16 @@ import os
 # get the bounding box of a detection
 #
 def GetBoundingBox(fhs):
+	x_locs = [fhs['hx'], fhs['rfx'], fhs['lfx'], fhs['rsx'], fhs['lsx'], fhs['rnx'], fhs['lnx'], fhs['rwx'], fhs['lwx']]
+	x_locs = [x for x in x_locs if x > 0]
+	y_locs = [fhs['hy'], fhs['rfy'], fhs['lfy'], fhs['rsy'], fhs['lsy'], fhs['rny'], fhs['lny'], fhs['rwy'], fhs['lwy']]
+	y_locs = [y for y in y_locs if y > 0]
+
 	bb = {}
-	bb['left'] = min(fhs['hx'], fhs['rfx'], fhs['lfx'], fhs['rsx'], fhs['lsx'], fhs['rnx'], fhs['lnx'], fhs['rwx'], fhs['lwx'])
-	bb['right'] = max(fhs['hx'], fhs['rfx'], fhs['lfx'], fhs['rsx'], fhs['lsx'], fhs['rnx'], fhs['lnx'], fhs['rwx'], fhs['lwx'])
-	bb['top'] = min(fhs['hy'], fhs['rfy'], fhs['lfy'], fhs['rsy'], fhs['lsy'], fhs['rny'], fhs['lny'], fhs['rwy'], fhs['lwy'])
-	bb['bottom'] = max(fhs['hy'], fhs['rfy'], fhs['lfy'], fhs['rsy'], fhs['lsy'], fhs['rny'], fhs['lny'], fhs['rwy'], fhs['lwy'])
+	bb['left'] = float(min(x_locs))
+	bb['right'] = float(max(x_locs))
+	bb['top'] = float(min(y_locs))
+	bb['bottom'] = float(max(y_locs))
 
 	return bb
 

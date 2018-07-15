@@ -19,5 +19,3 @@ def RunEval_Task2(database_path, database_main_file, results_path, num_sequences
 	eval_results = eval.EvaluateDataset(subjects, user_data)
 	# and get the metrics, use IoU = 0.4, so just leave this as default
 	sequence_results, metrics = eval.GenerateMetrics(eval_results)
-	print(sequence_results)
-	print(metrics)
