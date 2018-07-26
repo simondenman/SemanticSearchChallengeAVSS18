@@ -2,14 +2,31 @@
 # Main file to control everything
 #
 #	SD, 2018/07/15		Initial effort
+#	SD, 2018/07/26		Add Task 1
 #
 
 import csv
 import os
 
-import task_2.eval as eval
-import task_2.ground_truth as gt
-import task_2.results as results
+import task_2.eval as t2_eval
+import task_2.ground_truth as t2_gt
+import task_2.results as t2_results
+
+import task_1.eval as t1_eval
+import task_1.ground_truth as t1_gt
+import task_1.results as t1_results
+
+#
+# Task 1
+#
+def RunEval_Task1(groundtruth_file, results_file, output_path = '.', prefix = ''):
+	gt = t1_gt.ParseGroundTruth(groundtruth_file)
+	user_data = t1_results.load_results(results_file)
+
+	results = t1_eval.Evaluate(user_data, gt)
+	cmc = t1_eval.GetCMC(results)
+
+	return results, cmc
 
 #
 # Function to run the eval for task 2. Will load database and results, compute metrics, and dump results to
@@ -23,15 +40,15 @@ import task_2.results as results
 #
 def RunEval_Task2(database_path, database_main_file, results_path, num_sequences, output_path = '.', prefix = ''):
 	# load ground truth
-	subjects = gt.ParseDatabase(database_main_file, database_path)
+	subjects = t2_gt.ParseDatabase(database_main_file, database_path)
 
 	# load results
-	user_data = results.ParseResults(results_path, num_sequences)
+	user_data = t2_results.ParseResults(results_path, num_sequences)
 
 	# do eval
-	eval_results = eval.EvaluateDataset(subjects, user_data)
+	eval_results = t2_eval.EvaluateDataset(subjects, user_data)
 	# and get the metrics, use IoU = 0.4, so just leave this as default
-	sequence_results, metrics = eval.GenerateMetrics(eval_results)
+	sequence_results, metrics = t2_eval.GenerateMetrics(eval_results)
 
 	keys_sequence = sequence_results[0].keys()
 	keys_metrics = metrics.keys()
