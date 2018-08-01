@@ -13,7 +13,7 @@ Task one consists of a set of images and a set of queries, with the task being t
 
 For each row of the csv file, the first entry should be the query number (this corresponds to the ```query_id``` attribute in each ```<Person>``` tag in the XML file that contain the queries). After this should follow the list of images in order of best to worst match. Participants should use the full image name, including the extension.
 
-A sample CSV file is shown below.
+A sample CSV file is shown below. In this example we have limited the id's to 10 for simplicity, in your CSV file we expect you to include a total of 196 ranks and 196 id's for the full evaluation.
 ```
 query_id,1,2,3,4,5,6,7,8,9,10
 0,A_0001_01_001.png,A_0001_01_083.png,A_0001_03_126.png,A_0001_05_051.png,A_0002_01_021.png,A_0002_04_011.png,A_0002_08_051.png,A_0003_03_131.png,A_0003_04_026.png,A_0003_08_091.png
@@ -27,7 +27,7 @@ query_id,1,2,3,4,5,6,7,8,9,10
 8,A_0001_05_051.png,A_0002_01_021.png,A_0002_04_011.png,A_0002_08_051.png,A_0003_03_131.png,A_0003_04_026.png,A_0001_01_001.png,A_0001_01_083.png,A_0001_03_126.png,A_0003_08_091.png
 9,A_0003_03_131.png,A_0003_04_026.png,A_0003_08_091.png,A_0001_01_001.png,A_0001_01_083.png,A_0001_03_126.png,A_0001_05_051.png,A_0002_01_021.png,A_0002_04_011.png,A_0002_08_051.png
 ```
-Please ensure that the column headings are also included in your output file. 
+Please ensure that the column headings are also included in your output file. This can be seen in the first row of the CSV document, where we indicate the query_id, then the associated ranks, 1,2,...,10. In the full case this would be 1,...,196. 
 
 If for any reason you do not evaluate one or more queries, or don't return matches past a given rank, simply use a blank entry, i.e. as in the following case where only the best five images are returned for the first query, and the second query isn't attempted:
 ```
@@ -38,7 +38,7 @@ query_id,1,2,3,4,5,6,7,8,9,10
 
 ### Testing Your Output Format
 
-If you wish to verify that your code is outputting data in the correct format, the ```sample_data``` directory contains an XML for a small test set (using the first 10 queries from the training data) and the corresponding ground truth file that you may use. To use these, for each of the 10 queries in Test.xml compare to the 10 images listed in GT.xml; and output the results in the format described above.
+If you wish to verify that your code is outputting data in the correct format, the ```sample_data``` directory (in task_1) contains an XML for a small test set (using the first 10 queries from the training data) and the corresponding ground truth file that you may use. To use these, for each of the 10 queries in Test.xml compare to the 10 images listed in GT.xml; and output the results in the format described above.
 
 ## Task 2 Data Format
 

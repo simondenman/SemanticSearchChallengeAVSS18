@@ -19,13 +19,22 @@ import task_1.results as t1_results
 #
 # Task 1
 #
+# 	\param groundtruth_file		The xml file with the ground truth (use 'sample_data/GT.xml' for the sanity check)
+# 	\param results_file		This is the results .txt file (use 'sample_data/results_1.txt' or 'sample_daata/results_2.txt' or your own txt file for the sanity check)
+#	\param output_path 		MAH - Not in use (20180730)
+# 	\param prefix			MAH - Not in use (20180730)	
 def RunEval_Task1(groundtruth_file, results_file, output_path = '.', prefix = ''):
+	# load in the ground truth from the xml
 	gt = t1_gt.ParseGroundTruth(groundtruth_file)
+
+	# load in the results data from the txt file - CSV
 	user_data = t1_results.load_results(results_file)
 
+	# calculate the desired results.
 	results = t1_eval.Evaluate(user_data, gt)
 	cmc = t1_eval.GetCMC(results)
 
+	# in future the results will be output to a text file.
 	return results, cmc
 
 #
