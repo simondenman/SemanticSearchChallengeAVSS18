@@ -1,7 +1,7 @@
 Semantic Search Challenge - AVSS 2018
 =====================================
 
-This repository contains code used for the AVSS 2018 Semantic Person Search Challenge. This constits of the code used to run the evaluation against ground truth for the two tasks, and is provided for other researchers to benchmark their approaches after the challenge.
+This repository contains code used for the AVSS 2018 Semantic Person Search Challenge (https://semanticsbsearch.wordpress.com/). This constits of the code used to run the evaluation against ground truth for the two tasks, and is provided for other researchers to benchmark their approaches after the challenge.
 
 It is very important that the data for the results follows the format outlined below. Participants are strongly encouraged to test their output generation for compatibiity prior to submission. This can be done by using some or all of the training as a make-shift evaluation set to simply test your output format.
 
