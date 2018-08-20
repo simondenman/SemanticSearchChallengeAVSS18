@@ -10,7 +10,7 @@ import ground_truth
 
 def FindResult(results, query_id):
 	for r in results:
-		if (int(r['query_id']) == query_id):
+		if (int(r['query_id']) == (query_id-1)):
 			return r
 
 	return None;
