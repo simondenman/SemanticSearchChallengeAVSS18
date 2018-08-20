@@ -21,7 +21,7 @@ def ParseGroundTruth(mainfile):
 
 	queries = []
 
-	idx = 1
+	idx = 0
 	for s in root.findall('Person'):
  		queries.append((idx, s.get('filename')))
  		idx += 1
