@@ -4,6 +4,7 @@
 #	SD, 2018/07/15		Initial effort
 #	SD, 2018/07/26		Add Task 1
 #	SD, 2018/08/20		Added main, and all that stuff
+#						Store output in a file, rather than print to screen
 #
 
 import csv
@@ -36,10 +37,15 @@ def RunEval_Task1(groundtruth_file, results_file, output_path = '.', prefix = ''
 	results = t1_eval.Evaluate(user_data, gt)
 	cmc = t1_eval.GetCMC(results)
 
-	# in future the results will be output to a text file.
-	print(results)
-	print(cmc)
-	return results, cmc
+	f = open(os.path.join(output_path, prefix + '-cmc.txt'), 'w')
+	for i in cmc:
+		f.write(str(i) + '\n')
+	f.close()
+
+	f = open(os.path.join(output_path, prefix + '-rank.txt'), 'w')
+	for i in results:
+		f.write(str(i) + '\n')
+	f.close()
 
 #
 # Function to run the eval for task 2. Will load database and results, compute metrics, and dump results to
@@ -85,16 +91,16 @@ def Main():
 	# task 1 arguments
 	parser.add_argument('--t1_groundtruth', dest='t1_groundtruth', action='store', help='ground truth file for task 1')
 	parser.add_argument('--t1_results_file', dest='t1_results_file', action='store', help='results file for task 1')
-	parser.add_argument('--t1_output_path', dest='t1_output_path', action='store', help='output path for task 1 results')
-	parser.add_argument('--t1_prefix', dest='t1_prefix', action='store', help='what to prepend output file with')
+	parser.add_argument('--t1_output_path', dest='t1_output_path', action='store', help='output path for task 1 results', default='')
+	parser.add_argument('--t1_prefix', dest='t1_prefix', action='store', help='what to prepend output file with', default='')
 
 	# task 2 arguments
 	parser.add_argument('--t2_database_path', dest='t2_database_path', action='store', help='path to database for task 2')
 	parser.add_argument('--t2_database_main_file', dest='t2_database_main_file', action='store', help='main XML file for the database')
 	parser.add_argument('--t2_results_path', dest='t2_results_path', action='store', help='path to the results for task 2. Note that we expect these in a certain format')
 	parser.add_argument('--t2_num_sequences', dest='t2_num_sequences', type=int, help='number of sequences in the database', default=41)
-	parser.add_argument('--t2_output_path', dest='t2_output_path', action='store', help='output path for task 2 results')
-	parser.add_argument('--t2_prefix', dest='t2_prefix', action='store', help='what to prepend output file with')
+	parser.add_argument('--t2_output_path', dest='t2_output_path', action='store', help='output path for task 2 results', default='')
+	parser.add_argument('--t2_prefix', dest='t2_prefix', action='store', help='what to prepend output file with', default='')
 
 	args = parser.parse_args()
 
