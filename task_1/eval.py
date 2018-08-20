@@ -18,9 +18,6 @@ def FindResult(results, query_id):
 def Rank(gt, r):
 	for key in r:
 		if (r[key] == gt[1]):
-			print('match')
-			print(r[key])
-			print(gt[1])
 			return int(key)
 
 	return -1
