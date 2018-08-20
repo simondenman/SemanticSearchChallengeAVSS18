@@ -3,10 +3,12 @@
 #
 #	SD, 2018/07/15		Initial effort
 #	SD, 2018/07/26		Add Task 1
+#	SD, 2018/08/20		Added main, and all that stuff
 #
 
 import csv
 import os
+import argparse
 
 import task_2.eval as t2_eval
 import task_2.ground_truth as t2_gt
@@ -35,6 +37,8 @@ def RunEval_Task1(groundtruth_file, results_file, output_path = '.', prefix = ''
 	cmc = t1_eval.GetCMC(results)
 
 	# in future the results will be output to a text file.
+	print(results)
+	print(cmc)
 	return results, cmc
 
 #
@@ -72,3 +76,35 @@ def RunEval_Task2(database_path, database_main_file, results_path, num_sequences
 		dict_writer = csv.DictWriter(csv_out, keys_metrics)
 		dict_writer.writeheader()
 		dict_writer.writerow(metrics)
+
+def Main():
+
+	parser = argparse.ArgumentParser(description='AVSS 2018 Semantic Search Challenge Eval Tool.')
+	parser.add_argument('--mode', dest='mode', type=int, help='what eval are we doing? Task 1 (1), or Task 2 (2)? Anything else here is wrong.')
+
+	# task 1 arguments
+	parser.add_argument('--t1_groundtruth', dest='t1_groundtruth', action='store', help='ground truth file for task 1')
+	parser.add_argument('--t1_results_file', dest='t1_results_file', action='store', help='results file for task 1')
+	parser.add_argument('--t1_output_path', dest='t1_output_path', action='store', help='output path for task 1 results')
+	parser.add_argument('--t1_prefix', dest='t1_prefix', action='store', help='what to prepend output file with')
+
+	# task 2 arguments
+	parser.add_argument('--t2_database_path', dest='t2_database_path', action='store', help='path to database for task 2')
+	parser.add_argument('--t2_database_main_file', dest='t2_database_main_file', action='store', help='main XML file for the database')
+	parser.add_argument('--t2_results_path', dest='t2_results_path', action='store', help='path to the results for task 2. Note that we expect these in a certain format')
+	parser.add_argument('--t2_num_sequences', dest='t2_num_sequences', type=int, help='number of sequences in the database', default=41)
+	parser.add_argument('--t2_output_path', dest='t2_output_path', action='store', help='output path for task 2 results')
+	parser.add_argument('--t2_prefix', dest='t2_prefix', action='store', help='what to prepend output file with')
+
+	args = parser.parse_args()
+
+	if (args.mode == 1):
+		RunEval_Task1(args.t1_groundtruth, args.t1_results_file, args.t1_output_path, args.t1_prefix)
+	elif (args.mode == 2):
+		RunEval_Task2(args.t2_database_path, args.t2_database_main_file, args.t2_results_path, args.t2_num_sequences, \
+					  args.t2_output_path, args.t2_prefix)
+	else:
+		print('No, try again.')
+
+if __name__ == "__main__":
+    Main()
