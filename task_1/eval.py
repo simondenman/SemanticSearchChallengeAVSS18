@@ -10,7 +10,7 @@ import ground_truth
 
 def FindResult(results, query_id):
 	for r in results:
-		if (int(r['query_id']) == (query_id-1)):
+		if (int(r['query_id']) == query_id):
 			return r
 
 	return None;
@@ -43,6 +43,7 @@ def Evaluate(results, ground_truth):
 
 		r = FindResult(results, gt[0])
 		if (r is not None):
+			print(Rank(gt, r))
 			rank.append(Rank(gt, r))
 		else:
 			rank.append(fail)
