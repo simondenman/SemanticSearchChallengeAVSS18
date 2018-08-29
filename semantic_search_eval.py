@@ -18,6 +18,7 @@ import task_2.results as t2_results
 import task_1.eval as t1_eval
 import task_1.ground_truth as t1_gt
 import task_1.results as t1_results
+import task_1.plot as t1_plot
 
 #
 # Task 1
@@ -36,6 +37,8 @@ def RunEval_Task1(groundtruth_file, results_file, output_path = '.', prefix = ''
 	# calculate the desired results.
 	results = t1_eval.Evaluate(user_data, gt)
 	cmc = t1_eval.GetCMC(results)
+
+	t1_plot.cmc(cmc, save_loc=prefix + '-cmc.png')
 
 	f = open(os.path.join(output_path, prefix + '-cmc.txt'), 'w')
 	for i in cmc:
@@ -67,11 +70,16 @@ def RunEval_Task2(database_path, database_main_file, results_path, num_sequences
 	# do eval
 	eval_results = t2_eval.EvaluateDataset(subjects, user_data)
 	# and get the metrics, use IoU = 0.4, so just leave this as default
-	sequence_results, metrics = t2_eval.GenerateMetrics(eval_results)
+	frame_results, sequence_results, metrics = t2_eval.GenerateMetrics(eval_results)
 
+	keys_frame = frame_results[0].keys()
 	keys_sequence = sequence_results[0].keys()
 	keys_metrics = metrics.keys()
-	print(metrics)
+
+	with open(os.path.join(output_path, prefix + 'frame_results.txt'), 'wb') as csv_out:
+		dict_writer = csv.DictWriter(csv_out, keys_frame)
+		dict_writer.writeheader()
+		dict_writer.writerows(frame_results)
 
 	with open(os.path.join(output_path, prefix + 'sequence_results.txt'), 'wb') as csv_out:
 		dict_writer = csv.DictWriter(csv_out, keys_sequence)
