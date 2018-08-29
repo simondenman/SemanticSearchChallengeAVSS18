@@ -119,14 +119,14 @@ def GenerateMetrics(results, iou_thresh = 0.4):
 			frame_results.append({'sequence' : s, 'frame' : f['frame'], 'IoU' : f['IoU']})
 
 		sr = MetricsForSequence(r, iou_thresh)
-		overall_metrics['average_IoU'] += sr['average_IoU']*sr['observations']
+		overall_metrics['average_IoU'] += sr['average_IoU']
 		overall_metrics['percentage_above_thresh'] += sr['percentage_above_thresh']*sr['observations']
 		overall_metrics['observations'] += sr['observations']
 		sequence_results.append(sr)
 
 		s += 1
 
-	overall_metrics['average_IoU'] /= overall_metrics['observations']
+	overall_metrics['average_IoU'] /= len(sequence_results)
 	overall_metrics['percentage_above_thresh'] /= overall_metrics['observations']
 
 	return frame_results, sequence_results, overall_metrics
