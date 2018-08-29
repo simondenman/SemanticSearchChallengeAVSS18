@@ -62,6 +62,8 @@ def EvaluateSequence(gt_sequence, results_sequence):
 			r = results.GetResultsForFrame(results_sequence, gt['idx'])
 			if (r is not None):
 				frame_results.append({'frame' : gt['idx'], 'IoU': IoU(r, ground_truth.GetBoundingBox(gt))})
+			else:
+				frame_results.append({'frame' : gt['idx'], 'IoU' : 0})
 
 	return frame_results
 
@@ -104,20 +106,27 @@ def MetricsForSequence(sequence, iou_thresh = 0.4):
 #							that captures the overall metrics
 #
 def GenerateMetrics(results, iou_thresh = 0.4):
+	frame_results = []
 	sequence_results = []
 	overall_metrics = {}
 	overall_metrics['average_IoU'] = 0
 	overall_metrics['percentage_above_thresh'] = 0
 	overall_metrics['observations'] = 0	
 
+	s = 0
 	for r in results:
+		for f in r:
+			frame_results.append({'sequence' : s, 'frame' : f['frame'], 'IoU' : f['IoU']})
+
 		sr = MetricsForSequence(r, iou_thresh)
 		overall_metrics['average_IoU'] += sr['average_IoU']*sr['observations']
 		overall_metrics['percentage_above_thresh'] += sr['percentage_above_thresh']*sr['observations']
 		overall_metrics['observations'] += sr['observations']
 		sequence_results.append(sr)
 
+		s += 1
+
 	overall_metrics['average_IoU'] /= overall_metrics['observations']
 	overall_metrics['percentage_above_thresh'] /= overall_metrics['observations']
 
-	return sequence_results, overall_metrics
+	return frame_results, sequence_results, overall_metrics
