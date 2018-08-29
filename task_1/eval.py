@@ -43,7 +43,6 @@ def Evaluate(results, ground_truth):
 
 		r = FindResult(results, gt[0])
 		if (r is not None):
-			print(Rank(gt, r))
 			rank.append(Rank(gt, r))
 		else:
 			rank.append(fail)
