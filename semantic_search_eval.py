@@ -14,6 +14,7 @@ import argparse
 import task_2.eval as t2_eval
 import task_2.ground_truth as t2_gt
 import task_2.results as t2_results
+import task_2.plot as t2_plot
 
 import task_1.eval as t1_eval
 import task_1.ground_truth as t1_gt
@@ -75,6 +76,8 @@ def RunEval_Task2(database_path, database_main_file, results_path, num_sequences
 	keys_frame = frame_results[0].keys()
 	keys_sequence = sequence_results[0].keys()
 	keys_metrics = metrics.keys()
+
+	t2_plot.all_sequences(sequence_results, save_loc=prefix + 'sequennce_results.png')
 
 	with open(os.path.join(output_path, prefix + 'frame_results.txt'), 'wb') as csv_out:
 		dict_writer = csv.DictWriter(csv_out, keys_frame)
