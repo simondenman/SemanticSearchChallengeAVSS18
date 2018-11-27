@@ -5,6 +5,23 @@ This repository contains code used for the AVSS 2018 (https://avss2018.org/) Sem
 
 It is very important that the data for the results follows the format outlined below. Participants are strongly encouraged to test their output generation for compatibiity prior to submission. This can be done by using some or all of the training as a make-shift evaluation set to simply test your output format.
 
+Workshop Materials
+-----------
+
+The presentations by the organisers, and the summary paper, are avaialble in the workshop directory.
+
+Please note that if you use the database for either task we ask that you cite the summary paper (also in the workshop directory):
+
+```
+@inproceedings{halsteadAVSS2018Challenge2,
+  title={Semantic Person Retrieval in Surveillance Using Soft Biometrics: AVSS 2018 Challenge II},
+  author={Halstead, Michael and Denman, Simon and Fookes, Clinton and Tian, YingLi and Nixon, Mark},
+  booktitle={2018 IEEE International Conference on Advanced Video and Signal Based Surveillance},
+  pages={},
+  year={2018}
+}
+```
+
 Data Format
 -----------
 ## Task 1 Data Format
