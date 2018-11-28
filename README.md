@@ -1,16 +1,41 @@
 Semantic Search Challenge - AVSS 2018
 =====================================
 
-This repository contains code used for the AVSS 2018 (https://avss2018.org/) Semantic Person Search Challenge (https://semanticsbsearch.wordpress.com/). This constits of the code used to run the evaluation against ground truth for the two tasks, and is provided for other researchers to benchmark their approaches after the challenge.
+This repository contains code used for the AVSS 2018 (https://avss2018.org/) Semantic Person Search Challenge (https://semanticsbsearch.wordpress.com/), held on November 27, 2018. This constits of the code used to run the evaluation against ground truth for the two tasks, and is provided for other researchers to benchmark their approaches after the challenge.
 
-It is very important that the data for the results follows the format outlined below. Participants are strongly encouraged to test their output generation for compatibiity prior to submission. This can be done by using some or all of the training as a make-shift evaluation set to simply test your output format.
+Please note that to use the tools in this repository, it is important that the data for the results follows the format outlined below. 
 
-Workshop Materials
+If you have any problems with the data or tools, or have any questions regarding this, please contact Dr Simon Denman (s dot denman at qut dot edu dot au) or Dr Michael Halstead.
+
+Challenge Overview
 -----------
 
-The presentations by the organisers, and the summary paper, are avaialble in the workshop directory.
+The main aim of the two tasks in this challenge is to solve the following outcome: subject localisation using soft biometric traits without pre-search subject enrollment. Both tasks contain individualised data, however, it is permissible that data from one task may be used to augment the training data of the other (i.e. data from task one can be used in some manner to increase the performance in task two). One example of this may be the creation of comparative labels, where data in task 1 can be used to create these labels and then used for searching in task 2.
 
-Please note that if you use the database for either task we ask that you cite the summary paper (also in the workshop directory):
+In both of the tasks, for each of the subjects a set of soft biometric traits are labelled (different signatures are used in each task). Using the supplied soft biometrics participants are able to use either the complete list or a subset of those available, dependent on the technique they feel best solves the problem.
+
+A general breakdown of the two tasks is as follows:
+
+1. Person retrieval based on a semantic query, where ranked outputs between the query and a gallery of images are used. This can be seen as analogous to a person re-identification task, where probe images are replaced with queries.
+2. Subject localisation and retrieval, where a person matching a soft biometric description must be accurately localised in a video clip.
+
+
+Data
+-----------
+
+Data is available at https://data.researchdatafinder.qut.edu.au/dataset/saivt-semantic-person1. Please note that this contains data from our earlier [ICPR paper](https://eprints.qut.edu.au/72887/) as well as data for this challenge. Data specifically for the challenge is as follows:
+* [Task 1 Training Data](https://data.researchdatafinder.qut.edu.au/dataset/saivt-semantic-person1/resource/b1f05d6b-5ac4-4f5c-be82-9e1914d8e624)
+* [Task 1 Testing Data](https://data.researchdatafinder.qut.edu.au/dataset/saivt-semantic-person1/resource/9a72acb3-0b50-4109-b80f-71338d2c18fa)
+* [Task 2 Training Data](https://data.researchdatafinder.qut.edu.au/dataset/saivt-semantic-person1/resource/c8381fff-7417-4c2e-ba45-e3f0e57f5642)
+* [Task 2 Testing Data](https://data.researchdatafinder.qut.edu.au/dataset/saivt-semantic-person1/resource/e2111209-141c-4eae-a548-c5903cce870a)
+
+As part of this challenge, we also supplied auxiliary information, such as colour snippets taken from the same network for each of the colours annotated in the two tasks. Also included is a set of texture snippets (from different networks) which may accommodate the clothing texture modality. These can be found at:
+
+* [Auxiliary Data](https://data.researchdatafinder.qut.edu.au/dataset/saivt-semantic-person1/resource/3642dc68-c044-4026-a78d-f04c990b34c3)
+
+Note that ground truth for the test sets is not contained within these archives, but is available in this repository.
+
+Please note that if you use the database for either task we ask that you cite the summary paper, which can be found in the workshop directory of the repository:
 
 ```
 @inproceedings{halsteadAVSS2018Challenge2,
@@ -22,7 +47,12 @@ Please note that if you use the database for either task we ask that you cite th
 }
 ```
 
-Data Format
+Workshop Materials
+-----------
+
+The presentations by the organisers, and the summary paper, are avaialble in the workshop directory.
+
+Data Format for Evaluation Tools
 -----------
 ## Task 1 Data Format
 
